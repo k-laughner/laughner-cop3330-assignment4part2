@@ -1,0 +1,74 @@
+@startuml
+'https://plantuml.com/class-diagram
+class App {
++main() : void
++start() : void
+}
+class Controller {
+-TableView<tasks> list
+-TableColumn<tasks, String> taskName
+-TableColumn<tasks, String> dueDate
+-TableColumn<tasks, String> description
+-TableColumn<tasks, Boolean> status
+-TextField name
+-DatePicker dateInput
+-TextField descriptionInput
++ObservationalList<tasks> taskList
++initialize() : void
++addItem( MouseEvent e ) : void
++removeItem( MouseEvent e ) : void
++clearList( MouseEvent e ) : void
++changeDescription( CellEditEvent e ) : void
++changeDate( CellEditEvent e ) : void
++showComplete( MouseEvent e ) : void
++showIncomplete( MouseEvent e ) : void
++showAll( MouseEvent e ) : void
++saveList( Event e ) : void
++openList( Event e ) : void
+}
+class tasks{
+-String taskName
+-String dueDate
+-String description
+-BooleanProperty status
++tasks( String taskName, String dueDate, String description, boolean checked )
++getTaskName() : String
++getDueDate() : String
++setDueDate( String dueDate ) : void
++getDescription() : String
++setDescription( String description ) : void
++checkProperty() : BooleanProperty
+}
+class AppTest {
++ setup() : void
++ addToListTest() : void
++ removeListTest() : void
++ clearListTest() : void
++ descSizeTest() : void
++ dateFormatTest() : void
++ changeDescTest() : void
++ changeDueDateTest() : void
++ markCompleteTest() : void
++ showCompleteTest() : void
++ showIncompleteTest() : void
++ saveFileTest() : void
++ openListTest() : void
+}
+class functionalities {
++addToList(ObservableList<tasks> taskList, String name, String description, String date) : void
++removeList( ObservableList<tasks> taskList, tasks nameRemoved ) : void
++clearList(ObservableList<tasks> taskList) : void
++changeDesc(tasks taskSelected, String newDesc) : void
++changeDate(tasks taskSelected, String newDate) : void
++showComplete(ObservableList<tasks> taskList) : FilteredList
++showIncomplete(ObservableList<tasks> taskList) : FilteredList
++writeList(File file, ObservableList<tasks> taskList) : void
++chooseFile() : File
++viewOpenedFile(BufferedReader file, ObservableList<tasks> taskList) : void
++chooseListToOpen() : BufferedReader
+
+}
+class formatting {
++ checkDesc( String description ) : String
+}
+@enduml

@@ -1,0 +1,93 @@
+Class App
+    method main
+        launch
+    method start
+        assign root to App fxml file
+        Call Scene class
+        set primary stage to new scene of root
+        set primary stage to not be resizable
+        show primary stage
+Class Controller
+    TableView list
+    TableColumn of data type tasks for taskName
+    TableColumn of data type tasks for dueDate
+    TableColumn of data type tasks for description
+    TableColumn of data type tasks for status
+    TextField for task name
+    DatePicker for due date
+    TextField for description input
+    ObservableList taskList
+    method initialize
+        set cell value factories for each column
+        set items for tableView to ObservableList
+        allow description and duedate columns to be editable
+        format the description input to only allow 256 chars
+    method addItem
+        create strings for each input box
+        prevent null strings from being inserted
+        call addToList function
+        clear input boxes
+    method removeItem
+        find selected task
+        call removeList function to remove it
+    method clearList
+        call clearList function to clear the list
+    method changeDescription
+        get the selected task
+        get edited value
+        call changeDesc function to set description for selected task to edited value
+    method changeDate
+        get the selected task
+        get edited date
+        call ChangeDate function to set date for selected task to edited value
+    method showComplete
+        set a filtered list to the return of the showComplete function with parameter taskList
+        set the TableView items to the filtered list
+    method showIncomplete
+        set a filtered list to the return of the showIncomplete function with parameter taskList
+        set the TableView items to the filtered list
+    method showAll
+        set TableView items to the entire taskList
+    method saveList
+        call choose file function
+        call saveList function with chosen file
+    method openList
+        assign buffered reader to return of chooseListToOpen function
+        call viewOpenedFile function to view it in TableView
+Class functionalities
+    call formatting class
+    method addToList ( Observablelist taskList, String taskname, String description, String date )
+        call formatting class function check description to ensure description is 1-256 chars
+        set description to result of this function
+        add to taskList
+   method removeList ( Observablelist taskList, tasks taskRemoved)
+        remove taskRemoved from taskList
+   method clearList (Observablelist taskList)
+        clear the list
+   method changeDesc ( tasks selected, String newDesc)
+        set selected's description to newDesc
+   method changeDate( tasks selected, String newDate )
+        set selected's date to newDate
+   method showComplete (observableList taskList)
+        new filteredList with only checked off items
+        return the list
+   method showIncommplete (observableList taskList)
+        new filteredList with only unchecked items
+        return the list
+   method writeList ( file, taskList)
+        new file writer for file
+        loop through task list and write each to file
+   method chooseFile
+        use fileChooser to let user choose where to save the file
+   method saveList (observableList taskList, file)
+        call writeList function to write to specified file
+   method viewOpenedFile ( BufferedReader file, ObservableList taskList )
+        clear the task list before loading the list
+        loop through items in file to add to the taskList
+   method chooseListToOpen
+        use fileChooser to let user choose the file to open
+Class formatting
+    method checkDesc ( string desc )
+        if desc length is greater than 256
+            loop through each char to add to new string until 256 char limit is reached, do not use any value after the 256 limit
+        return string new desc
